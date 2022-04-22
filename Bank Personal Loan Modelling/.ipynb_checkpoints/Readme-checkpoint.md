@@ -1,0 +1,1 @@
+![Distribution](https://github.com/shaikh96arshad/AWS-Projects/blob/main/Bank%20Personal%20Loan%20Modelling/images/Distribution.png)
