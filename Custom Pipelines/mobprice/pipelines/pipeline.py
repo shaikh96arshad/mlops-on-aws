@@ -110,7 +110,7 @@ def get_pipeline(
         an instance of a pipeline
     """
     sagemaker_session = get_session(region, default_bucket)
-    input_data_uri=f"s3://ars-mlops-projects/mobile-price-prediction/data/raw_data/test.csv"
+    input_data_uri=f"s3://ars-mlops-projects/mobile-price-prediction/data/raw_data/train.csv"
     if role is None:
         role = sagemaker.session.get_execution_role(sagemaker_session)
         
@@ -155,10 +155,9 @@ def get_pipeline(
         ],
         outputs=[
             ProcessingOutput(output_name="train", source="/opt/ml/processing/train"),
-            ProcessingOutput(output_name="validation", source="/opt/ml/processing/validation"),
             ProcessingOutput(output_name="test", source="/opt/ml/processing/test")
         ],
-        code=os.path.join(BASE_DIR, "preprocess.py"),
+        code=os.path.join(BASE_DIR, "preprocessing.py"),
         job_arguments=["--input-data", input_data],
     )
     
@@ -206,14 +205,57 @@ def get_pipeline(
                 ].S3Output.S3Uri,
                 content_type="text/csv"
             ),
-            "validation": TrainingInput(
+            "test": TrainingInput(
                 s3_data=step_process.properties.ProcessingOutputConfig.Outputs[
-                    "validation"
+                    "test"
                 ].S3Output.S3Uri,
                 content_type="text/csv"
             )
         },
     )
+    
+    ###Evaluation Step
+    script_eval = ScriptProcessor(
+        image_uri=image_uri,
+        command=["python3"],
+        instance_type=processing_instance_type,
+        instance_count=1,
+        base_job_name=f"{base_job_prefix}/script-bpl-eval",
+        sagemaker_session=sagemaker_session,
+        role=role,
+    )
+    evaluation_report = PropertyFile(
+        name="AbaloneEvaluationReport",
+        output_name="evaluation",
+        path="evaluation.json",
+    )
+    step_eval = ProcessingStep(
+        name="EvaluateBPLModel",
+        processor=script_eval,
+        inputs=[
+            ProcessingInput(
+                source=step_train.properties.ModelArtifacts.S3ModelArtifacts,
+                destination="/opt/ml/processing/model",
+            ),
+            ProcessingInput(
+                source=step_process.properties.ProcessingOutputConfig.Outputs[
+                    "test"
+                ].S3Output.S3Uri,
+                destination="/opt/ml/processing/test",
+            ),
+        ],
+        outputs=[
+            ProcessingOutput(output_name="evaluation", source="/opt/ml/processing/evaluation"),
+        ],
+        code=os.path.join(BASE_DIR, "evaluate.py"),
+        property_files=[evaluation_report],
+    )
+
+    
+    
+    
+    
+    
     pipeline_name = f"MobPricePipeline"
     pipeline = Pipeline(
         name=pipeline_name,
