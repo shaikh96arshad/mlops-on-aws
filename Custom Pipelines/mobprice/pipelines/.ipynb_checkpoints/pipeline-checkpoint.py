@@ -179,7 +179,7 @@ def get_pipeline(
     training_instance_type = 'ml.m5.xlarge'
     ## Training Step
     model_path = f"s3://{sagemaker_session.default_bucket()}/{base_job_prefix}/MobTrain"
-    image_uri = sagemaker.image_uris.retrieve(
+    mage_uri = sagemaker.image_uris.retrieve(
         framework="xgboost",
         region=region,
         version="1.0-1",
