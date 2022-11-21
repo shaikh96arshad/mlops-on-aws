@@ -9,7 +9,7 @@ COPY requirements.txt ./
 RUN pip install -r requirements.txt
 
 # Bundle app source
-COPY Deploy application to ECS/ .
+COPY DeployApplicationToECS/ .
 
 CMD ["python", "train.py" ]
 
