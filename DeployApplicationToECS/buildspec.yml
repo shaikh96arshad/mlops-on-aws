@@ -13,10 +13,10 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t ecs_sample_app:latest DeployApplicationToECS/.
-      - docker tag ecs_sample_app:latest 832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:latest      
+      - docker tag ecs_sample_app:latest 832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:git      
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:latest
+      - docker push 832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:git
       
