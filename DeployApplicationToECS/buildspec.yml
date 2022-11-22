@@ -12,7 +12,7 @@ phases:
       - export SAGEMAKER_PROJECT_NAME_ID="${SAGEMAKER_PROJECT_NAME}-DeployApptoECS"
       - echo Build started on `date`
       - echo Building the Docker image...
-      - ls
+      - ls DeployApplicationToECS/
       - docker build -t ecs_sample_app:latest DeployApplicationToECS/.
       - docker tag ecs_sample_app:latest 832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:git      
   post_build:
