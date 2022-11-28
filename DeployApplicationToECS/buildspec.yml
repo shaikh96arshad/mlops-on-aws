@@ -21,3 +21,7 @@ phases:
       - echo Pushing the Docker image...
       - docker push 832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:git
       
+artifacts:
+    files:
+        - imagedefinitions.json
+      
