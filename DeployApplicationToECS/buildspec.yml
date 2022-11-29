@@ -21,7 +21,8 @@ phases:
       - echo Pushing the Docker image...
       - docker push 832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:git
       - echo Writing image definitions file...
-      - printf '832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:git' > imagedefinitions.json
+      - printf '[{"name":"container","imageUri":"832173187970.dkr.ecr.ap-south-1.amazonaws.com/ecs_sample_app:git"}]'  > imagedefinitions.json
+artifacts:
       
 artifacts:
     files:

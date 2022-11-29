@@ -1,0 +1,2 @@
+run below command o download data 
+aws s3 cp --recursive s3://dlai-practical-data-science/labs/c3w2-659321/ ./
