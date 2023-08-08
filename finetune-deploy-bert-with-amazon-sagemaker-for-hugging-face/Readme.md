@@ -1,1 +1,1 @@
-This notebook shows how to finetune a model from Hugging Face
+This notebook shows how to finetune a model from Hugging Face.
