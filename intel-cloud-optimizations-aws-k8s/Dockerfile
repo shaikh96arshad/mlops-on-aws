@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 FROM python:slim
 # copy assets over to image
 COPY /app /app
-RUN pip3 install --user --no-cache-dir -r requirements.txt
+RUN pip3 install --user --no-cache-dir -r /app/requirements.txt
 ENV PATH=.local/bin:$PATH
 
 # set the working directory
