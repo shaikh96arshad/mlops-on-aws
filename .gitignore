@@ -1,2 +1,7 @@
 finetune-deploy-bert-with-amazon-sagemaker-for-hugging-face/.ipynb_checkpoints/finetune-distilbert.ipynb-checkpoint.ipynb
 finetune-deploy-bert-with-amazon-sagemaker-for-hugging-face/scripts/.ipynb_checkpoints/train-checkpoint.py
+/.idea/misc.xml
+/.idea/mlops-on-aws.iml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml
