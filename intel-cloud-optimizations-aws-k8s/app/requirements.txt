@@ -11,4 +11,5 @@ scikit-learn
 scikit-learn-intelex
 uvicorn
 xgboost
+scikit-learn
 
