@@ -12,11 +12,11 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t intel-cloud-optimizations-aws-k8s:latest intel-cloud-optimizations-aws-k8s/.
-      - docker tag intel-cloud-optimizations-aws-k8s:latest 632619531167.dkr.ecr.us-east-2.amazonaws.com/intel-cloud-optimizations-aws-k8s
+      - docker tag intel-cloud-optimizations-aws-k8s:latest 632619531167.dkr.ecr.us-east-2.amazonaws.com/intel-cloud-optimizations-aws-k8s:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 632619531167.dkr.ecr.us-east-2.amazonaws.com/intel-cloud-optimizations-aws-k8s:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"container","imageUri":"632619531167.dkr.ecr.us-east-2.amazonaws.com/intel-cloud-optimizations-aws-k8s"}]'
+
