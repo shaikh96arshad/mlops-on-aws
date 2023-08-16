@@ -6,7 +6,7 @@ metadata:
   labels:
     app: "loan-default"
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: "loan-default"
@@ -25,7 +25,7 @@ spec:
               app: "loan-default"
      containers:
        - name: "model-image"
-         image: # add your image URI here
+         image: 632619531167.dkr.ecr.us-east-2.amazonaws.com/intel-cloud-optimizations-aws-k8s:latest
          ports:
            - containerPort: 80
          imagePullPolicy: "Always"
